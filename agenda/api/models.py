@@ -6,8 +6,8 @@ class Sala(models.Model):
   description = models.CharField(max_length=200)
   created_at = models.DateTimeField(auto_now_add=True)
 
-def __str__(self):
-  return '%s - %s' % (self.name, self.description)
+  def __str__(self):
+    return '%s - %s' % (self.name, self.description)
 
 
 
@@ -38,9 +38,9 @@ class Period(models.Model):
   start_date = models.DateField()
   start_at = models.TimeField()
   finish_at = models.TimeField()
-  user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-  room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
+  user = models.ForeignKey('User', related_name='user', on_delete=models.CASCADE, null=True)
+  room = models.ForeignKey('Room', on_delete=models.CASCADE, null=True)
   created_at = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
-    return '%s %s %s' % (self.start_date, self.start_at, self.finish_at)
+    return '%s %s %s %s %s' % (self.start_date, self.start_at, self.finish_at, self.user, self.room)
